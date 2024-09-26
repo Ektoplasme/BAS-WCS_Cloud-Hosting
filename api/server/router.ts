@@ -1,5 +1,5 @@
 import { Router, NextFunction } from 'express';
-import reposDatas from '../data/formated_repos.json'
+import reposControllers from './repos.controllers'
 
 // Outil pour la validation de données
 import Joi from 'joi';
@@ -25,14 +25,17 @@ const validateRepoData = (req:any, res:any, next: NextFunction) => {
 }
 
 // GET tous les repos
-router.get('/', (_, res)=>{
-    res.status(200).json(reposDatas);
-});
+router.get('/', reposControllers.browse);
 
 // POST un nouveau repo et renvoie la liste modifiee
-router.post('/', validateRepoData, (req, res)=>{
-    reposDatas.push(req.body);
-    res.status(201).json(reposDatas);
-});
+router.post('/', validateRepoData, reposControllers.add);
+
+// DELETE un repo depuis son id dans les query params
+router.delete('/:id', reposControllers.remove);
+
+router.put('/', validateRepoData, (req, res)=>{
+    // Prendre l'id dans req pour supprimer la data correspondante
+    // Push la data de req a la place de l'id
+})
 
 export default router;
