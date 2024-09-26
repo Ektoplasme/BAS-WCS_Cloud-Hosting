@@ -1,0 +1,16 @@
+### GET ALL REPOS
+GET http://localhost:3000/repos
+
+### POST REPOS AND GET ALL
+POST http://localhost:3000/repos/
+Content-Type: application/json
+
+{
+    "id": "NAUmnOlergikjIOJOIjiowdij==",
+    "name": "Trop cool projet",
+    "url": "https://github.com/Toto/weshAlors",
+    "languages": [
+        "Golang",
+        "Javascript"
+    ]
+}

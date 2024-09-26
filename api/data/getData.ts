@@ -35,4 +35,9 @@ const formatedRepos = raw.map((repo: Repository)=>{
     })
 })
 
-console.log(formatedRepos);
+fs.writeFile(
+    './data/formated_repos.json',
+    JSON.stringify(formatedRepos),
+    (err) =>
+      err ? console.error(err) : console.log("Formated repos file created.")
+  )
