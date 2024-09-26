@@ -2,11 +2,11 @@
 GET http://localhost:3000/repos
 
 ### POST REPOS AND GET ALL
-POST http://localhost:3000/repos/
+POST http://localhost:3000/repos
 Content-Type: application/json
 
 {
-    "id": "NAUmnOlergikjIOJOIjiowdij==",
+    "id": "1313",
     "name": "Trop cool projet",
     "url": "https://github.com/Toto/weshAlors",
     "languages": [
@@ -14,3 +14,6 @@ Content-Type: application/json
         "Javascript"
     ]
 }
+
+### DELETE REPO BY ID
+DELETE http://localhost:3000/repos/1313
