@@ -1,5 +1,6 @@
 import express from 'express';
 import router from './router';
+import { dataSource } from "./db/client";
 
 // Fichier de base du serveur
 
@@ -13,7 +14,8 @@ app.get('/', (req:any, res:any) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  await dataSource.initialize();
   console.log(`Listening on port ${port}`)
 })
 

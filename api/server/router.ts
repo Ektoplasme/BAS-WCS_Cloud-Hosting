@@ -1,5 +1,5 @@
 import { Router, NextFunction } from 'express';
-import reposControllers from './repos.controllers'
+import reposControllers from './repos/repos.controllers'
 
 // Outil pour la validation de données
 import Joi from 'joi';
@@ -18,10 +18,11 @@ const schema = Joi.object({
 const validateRepoData = (req:any, res:any, next: NextFunction) => {
     const { error } = schema.validate(req.body);
 
-    if (!error) next();
-
-    // 422 Unprocessable Entity
-    res.status(422).json(error);
+    if (!error){
+        next()
+    } else {
+        res.status(422).json(error)
+    };
 }
 
 // GET tous les repos
