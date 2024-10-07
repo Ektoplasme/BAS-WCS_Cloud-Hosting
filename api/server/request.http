@@ -1,6 +1,12 @@
 ### GET ALL REPOS
 GET http://localhost:3000/repos
 
+### GET ALL LANGS
+GET http://localhost:3000/langs
+
+### GET ALL STATUS
+GET http://localhost:3000/status
+
 ### POST REPOS AND GET ALL
 POST http://localhost:3000/repos
 Content-Type: application/json
@@ -14,6 +20,25 @@ Content-Type: application/json
         "Javascript"
     ]
 }
+
+### POST LANGUAGE
+POST http://localhost:3000/langs
+Content-Type: application/json
+
+{
+    "id": 24,
+    "label": "JAVASCRIPT"
+}
+
+### POST STATUS
+POST http://localhost:3000/status
+Content-Type: application/json
+
+{
+    "id": "efsefsef5",
+    "label": "public"
+}
+
 
 ### DELETE REPO BY ID
 DELETE http://localhost:3000/repos/1313

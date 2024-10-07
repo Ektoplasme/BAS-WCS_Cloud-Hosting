@@ -1,10 +1,33 @@
-import { Response, Request } from 'express';
-import reposDatas from '../../data/formated_repos.json';
+import { Router, Response, Request, NextFunction } from 'express';
 import { Repo } from "./repo.entities";
 
+// Outil pour la validation de données
+import Joi from 'joi';
+
+const reposControllers = Router();
+
+// Schema de validation
+const schema = Joi.object({
+    id: Joi.string().required(),
+    name: Joi.string().required(),
+    url: Joi.string().required(),
+    languages: Joi.array().required()
+});
+
+// On valide les données avant de les envoyer en BDD à l'aide de JOI
+const validateRepoData = (req:any, res:any, next: NextFunction) => {
+    const { error } = schema.validate(req.body);
+
+    if (!error){
+        next()
+    } else {
+        res.status(422).json(error)
+    };
+}
 
 // Get all repos
 const browse = async (_: any, res: Response) => {
+    console.log("dans browse");
     try {
         const repos = await Repo.find();
         res.status(200).json(repos)
@@ -49,4 +72,9 @@ const remove = async (req: Request, res: Response) => {
     }
 }
 
-export default { browse, add, remove }
+reposControllers.get('/', browse);
+reposControllers.post('/', validateRepoData, add);
+reposControllers.delete('/:id', remove);
+reposControllers.put('/', validateRepoData, (req, res)=>{});
+
+export default reposControllers;

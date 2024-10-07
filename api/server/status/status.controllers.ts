@@ -1,16 +1,12 @@
-import express, { Response, Request  } from "express";
+import { Router, Response, Request  } from "express";
 
 import { Status } from "./status.entities";
 
-const statusControllers = express.Router();
+const statusControllers = Router();
 
 statusControllers.get("/", async (_: any, res: Response) => {
   try {
-    const status = await Status.find({
-      relations: {
-        repos: true
-      }
-    });
+    const status = await Status.find();
     res.status(200).json(status)
   } catch (error) {
     res.sendStatus(500)

@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-server": "ts-node ./server/server.ts",
-    "create-data": "ts-node ./data/getData.ts"
+    "create-data": "ts-node ./data/getData.ts",
+    "seed": "ts-node ./server/db/seed.ts"
   },
   "keywords": [],
   "author": "",

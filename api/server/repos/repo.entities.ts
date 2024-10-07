@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
 import { Min, Max, IsString } from "class-validator";
 import { Status } from "../status/status.entities";
-import { Langs } from "../langs/langs.entities";
+import { Lang } from "../langs/langs.entities";
 
 @Entity()
 export class Repo extends BaseEntity {
@@ -23,6 +23,6 @@ export class Repo extends BaseEntity {
     @Max(2)
     status?: Status;
 
-  // @ManyToMany(() => Langs, lang => lang.repos)
-  //   langs?: Langs[];
+  @ManyToMany(() => Lang, lang => lang.repos)
+    langs?: Lang[];
 }

@@ -3,14 +3,14 @@ import { BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGe
 import { Repo } from "../repos/repo.entities";
 
 @Entity()
-export class Langs extends BaseEntity {
+export class Lang extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
   label!: string;
 
-//   @ManyToMany(() => Repo, repo => repo.langs)
-//   @JoinTable()
-//   repos?: Repo[]
+  @ManyToMany(() => Repo, repo => repo.langs)
+  @JoinTable()
+  repos?: Repo[];
 }
