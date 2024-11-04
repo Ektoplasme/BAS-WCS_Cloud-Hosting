@@ -23,6 +23,12 @@ const CREATE_REPO_MUTATION = gql`
   }
 `;
 
+type Repo = {
+  id: string,
+  name: string,
+  url: string
+}
+
 function App() {
   const [getRepoList, { loading, error, data, refetch }] = useLazyQuery(GET_REPOS);
   const [repoInput, setRepoInput] = useState({ id: "", name: "", url: "" });
@@ -33,7 +39,7 @@ function App() {
   if (loading || mutationLoading) return <h1>Loading ...</h1>;
   if (error || mutationError) return <p>Error</p>;
 
-  const submit = async (e) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await createNewRepo({
@@ -47,7 +53,7 @@ function App() {
       });
       console.log('Repo créé avec succès', mutationData);
       refetch();
-    } catch (err) {
+    } catch {
       console.error('Erreur lors de la création du repo', mutationError);
     }
   };
@@ -66,7 +72,7 @@ function App() {
         {(!data || !showRepoList) && <h2>Clique sur le bouton pour fetch les repos</h2>}
         <button onClick={handleClick}>Get Repo List</button>
         <button onClick={() => setShowRepoList(false)}>Clear Repo List</button>
-        {(showRepoList && data) && data.getRepo.map(el => {
+        {(showRepoList && data) && data.getRepo.map((el: Repo) => {
           return <div key={el.id} className='card'>
             <div><b>id:</b> {el.id}</div>
             <div><b>name:</b> {el.name}</div>
@@ -79,10 +85,10 @@ function App() {
             name='id'
             placeholder='id'
             value={repoInput.id}
-            onChange={(e) => setRepoInput({ ...repoInput, id: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepoInput({ ...repoInput, id: e.target.value })}
           />
-          <input name='name' placeholder='name' value={repoInput.name} onChange={(e) => setRepoInput({ ...repoInput, name: e.target.value })}></input>
-          <input name='url' placeholder='url' value={repoInput.url} onChange={(e) => setRepoInput({ ...repoInput, url: e.target.value })}></input>
+          <input name='name' placeholder='name' value={repoInput.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepoInput({ ...repoInput, name: e.target.value })}></input>
+          <input name='url' placeholder='url' value={repoInput.url} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepoInput({ ...repoInput, url: e.target.value })}></input>
           <button type='submit'>Create</button>
         </form>
       </div>
