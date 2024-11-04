@@ -27,6 +27,7 @@ export default class RepoResolver {
     // Get all repos
     @Query(() => [Repo])
     async getRepo() {
+        console.log("GET REPO")
         const repos = await Repo.find()
         console.log(repos)
         return repos

@@ -27,7 +27,7 @@ services:
     build: ./server
     env_file: .env
     restart: always
-    command: npm run start
+    command: npm run full
     volumes:
       - ./api:/app/
     ports:

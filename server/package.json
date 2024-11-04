@@ -5,7 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "compile": "tsc",
+    "seed": "ts-node ./db/seeder.ts",
     "start": "npm run compile && node ./dist/src/index.js",
+    "full": "npm run seed && npm run start",
     "format-data": "ts-node ./data/getData.ts",
     "fetch-data": "gh repo list Ektoplasme --json id,name,url,languages,isPrivate > ./data/raw.json"
   },

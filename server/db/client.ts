@@ -6,8 +6,10 @@ import { Repo } from "../src/repos/repo.entities";
 
 dotenv.config();
 
-// const { BACKEND_FILE } = process.env;
 
+// AVEC SQLITE
+
+// const { BACKEND_FILE } = process.env;
 // export const dataSource = new DataSource({
 //   type: "sqlite",
 //   database: `${BACKEND_FILE}`,
@@ -15,13 +17,23 @@ dotenv.config();
 //   synchronize: true
 // });
 
+
+
+// AVEC POSTGRES
 export const dataSource = new DataSource({
   type: "postgres",
-  host: "db", // Nom de l'image associé à Postgres --name dans la commande
+  // avec la db sur docker en local
+  // host: "db",
+  // username: "postgres",
+  // password: "password",
+  // database: "postgres",
+
+  // Avec la db sur l'hebergeur alwaysdata.net
+  host: "postgresql-kainomel.alwaysdata.net",
   port: 5432,
-  username: "postgres",
-  password: "password", // -e POSTGRES_PASSWORD=
-  database: "postgres",
+  username: "kainomel",
+  password: "wildcodeschool",
+  database: "kainomel_bac-a-sable",
   entities: [Repo],
   synchronize: true,
 });
