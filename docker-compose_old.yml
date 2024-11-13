@@ -1,10 +1,26 @@
 services:
+  db:
+    container_name: db
+    image: postgres
+    env_file: .env
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   adminer:
     container_name: adminer
     image: adminer
     ports:
       - 8080:8080
     restart: always
+    depends_on:
+      db:
+        condition: service_healthy
 
   server:
     container_name: server
@@ -16,6 +32,9 @@ services:
       - ./api:/app/
     ports:
       - 4000:4000
+    depends_on:
+      db:
+        condition: service_healthy
 
   client:
     container_name: client
@@ -28,3 +47,6 @@ services:
       - VITE_API_URL=http://localhost:4000
     volumes:
       - ./client:/app/
+    depends_on:
+      db:
+        condition: service_healthy

@@ -7,7 +7,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const client = new ApolloClient({
-  uri: "https://bac-a-sable-api.onrender.com/",
+  // Si on veut utiliser le serveur hebergé sur render
+  // uri: "https://bac-a-sable-api.onrender.com/",
+  uri: "https://0.0.0.0:4000",
   cache: new InMemoryCache(),
 });
 
