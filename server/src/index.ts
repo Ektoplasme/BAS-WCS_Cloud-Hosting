@@ -1,16 +1,13 @@
 import { ApolloServer } from '@apollo/server'; // preserve-line
 import { startStandaloneServer } from '@apollo/server/standalone'; // preserve-line
-import { buildSchema } from 'type-graphql'
 import "reflect-metadata";
 import { dataSource } from "../db/client";
 
-import RepoResolver from "./repos/repo.resolver";
+import getSchema from './schema';
 
 (async () => {
   await dataSource.initialize();
-  const schema = await buildSchema({
-    resolvers: [RepoResolver],
-  });
+  const schema = await getSchema();
 
   const server = new ApolloServer({
     schema,
