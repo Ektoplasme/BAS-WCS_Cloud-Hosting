@@ -6,3 +6,6 @@ clean:
 
 dev:
 	docker compose -f docker-compose.dev.yml up --build -d
+
+test:
+	docker compose -f docker-compose.test.yml up --build
