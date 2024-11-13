@@ -1,0 +1,10 @@
+services:
+  api:
+    build: ./server
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        npm run seed
+        npm run test
+    restart: always
+    env_file: .env
